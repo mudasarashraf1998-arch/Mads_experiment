@@ -9,8 +9,8 @@ from PyQt6.QtCore import QUrl, Qt
 from PyQt6.QtGui import QBrush, QColor, QDesktopServices
 from PyQt6.QtWidgets import (
     QCheckBox, QComboBox, QDialog, QDialogButtonBox, QFileDialog, QFormLayout,
-    QHBoxLayout, QHeaderView, QLabel, QPushButton, QSpinBox, QTableWidget,
-    QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget,
+    QHBoxLayout, QHeaderView, QLabel, QLineEdit, QPushButton, QSpinBox,
+    QTableWidget, QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget,
 )
 
 from ..config import Settings

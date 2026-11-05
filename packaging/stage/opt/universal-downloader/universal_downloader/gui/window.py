@@ -11,9 +11,10 @@ from pathlib import Path
 from PyQt6.QtCore import Qt, QUrl
 from PyQt6.QtGui import QDesktopServices, QColor, QBrush
 from PyQt6.QtWidgets import (
-    QAbstractItemView, QApplication, QFrame, QHBoxLayout, QHeaderView,
-    QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget, QProgressBar,
+    QAbstractItemView, QApplication, QComboBox, QFrame, QGroupBox,
+    QHBoxLayout, QHeaderView, QLabel, QLineEdit, QMainWindow,
+    QMessageBox, QPushButton, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget, QProgressBar,
 )
 
 from .. import APP_DISPLAY_NAME, __version__

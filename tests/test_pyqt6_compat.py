@@ -12,6 +12,7 @@ pulls in libxkbcommon0 automatically, so these imports work there.
 
 from __future__ import annotations
 
+import ast
 import importlib
 import re
 from pathlib import Path
@@ -266,3 +267,116 @@ def test_no_clipboard_mode() -> None:
     for fpath in py_files:
         src = Path(fpath).read_text()
         assert "ClipboardMode" not in src, f"{fpath} uses removed QApplication.ClipboardMode"
+
+
+# ------------------------------------------------------------------ GUI import completeness
+
+GUI_FILES = [
+    "universal_downloader/gui/app.py",
+    "universal_downloader/gui/window.py",
+    "universal_downloader/gui/dialogs.py",
+    "universal_downloader/gui/widgets.py",
+]
+
+# Known non-Qt names starting with Q that are imported from local modules,
+# not PyQt6. These should be excluded from the Qt import check.
+NON_QT_Q_NAMES = {"QueueItem", "QueueModel"}
+
+
+def _qt_class_usages(src: str) -> set[str]:
+    """Return Qt class names referenced in source (Q-prefixed names used as calls/types)."""
+    tree = ast.parse(src)
+    usages: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Name) and node.id.startswith("Q") and len(node.id) > 1:
+            usages.add(node.id)
+        # Also catch attribute-style like Qt.AlignmentFlag (already handled by module check)
+    return usages
+
+
+def _qt_imports(src: str) -> dict[str, set[str]]:
+    """Return {module: set of imported names} for PyQt6 imports."""
+    tree = ast.parse(src)
+    imports: dict[str, set[str]] = {}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom) and node.module and node.module.startswith("PyQt6."):
+            names = {alias.name for alias in node.names}
+            imports.setdefault(node.module, set()).update(names)
+    return imports
+
+
+def test_all_qt_classes_imported_in_gui_files() -> None:
+    """Every Q-prefixed Qt class used in GUI files must be imported from PyQt6.
+
+    Regression test: QComboBox and QGroupBox were used in gui/window.py but
+    not imported, causing NameError at GUI startup on Linux Mint 22.3.
+    QLineEdit was used in gui/dialogs.py but not imported.
+    """
+    import ast
+
+    for fpath in GUI_FILES:
+        src = Path(fpath).read_text()
+        usages = _qt_class_usages(src)
+        imports = _qt_imports(src)
+
+        all_imported: set[str] = set()
+        for names in imports.values():
+            all_imported.update(names)
+
+        # Remove non-Qt local names
+        usages = usages - NON_QT_Q_NAMES
+
+        missing = usages - all_imported
+        assert not missing, (
+            f"{fpath}: Qt classes used but not imported: {sorted(missing)}. "
+            f"Add them to the PyQt6 import statement."
+        )
+
+
+def test_gui_modules_importable() -> None:
+    """All GUI modules must import without NameError or ImportError.
+
+    Skips in headless sandbox when PyQt6.QtWidgets cannot be imported
+    due to missing libxkbcommon.so.0. On Linux Mint 22.3, all import fine.
+    """
+    import importlib
+
+    mod_names = [
+        "universal_downloader.gui.app",
+        "universal_downloader.gui.widgets",
+        "universal_downloader.gui.dialogs",
+        "universal_downloader.gui.window",
+    ]
+    for mod_name in mod_names:
+        try:
+            importlib.import_module(mod_name)
+        except ImportError as exc:
+            if "libxkbcommon" in str(exc):
+                pytest.skip(f"{mod_name} skipped: QtWidgets not importable in headless sandbox")
+            raise
+
+
+def test_main_window_construction() -> None:
+    """MainWindow must construct without NameError.
+
+    Skips in headless sandbox when PyQt6.QtWidgets cannot be imported
+    due to missing libxkbcommon.so.0. On Linux Mint 22.3, this constructs
+    the full window including QComboBox, QGroupBox, etc.
+    """
+    try:
+        from universal_downloader.gui.window import MainWindow
+    except ImportError as exc:
+        if "libxkbcommon" in str(exc):
+            pytest.skip("MainWindow skipped: QtWidgets not importable in headless sandbox")
+        raise
+    from universal_downloader.config import Settings
+
+    settings = Settings()
+    window = MainWindow()
+    assert window is not None
+    assert window.model is not None
+    assert window.controller is not None
+    # Verify the previously-missing widgets exist
+    assert hasattr(window, "source_combo"), "source_combo (QComboBox) not created"
+    assert hasattr(window, "options_box"), "options_box (QGroupBox) not created"
+    window.close()

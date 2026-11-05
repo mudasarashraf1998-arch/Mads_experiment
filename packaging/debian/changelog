@@ -1,3 +1,19 @@
+universal-downloader (2.0.8) stable; urgency=medium
+
+  * Fixed GUI startup NameError crashes: QComboBox and QGroupBox were used
+    in gui/window.py but not imported; QLineEdit was used in
+    gui/dialogs.py but not imported. Added all missing QtWidgets imports.
+  * Added regression tests:
+    test_all_qt_classes_imported_in_gui_files — verifies every Qt class
+    used in GUI files is imported from PyQt6
+    test_gui_modules_importable — verifies all GUI modules import without
+    NameError or ImportError
+    test_main_window_construction — verifies MainWindow constructs
+    successfully (skips in headless sandbox lacking libxkbcommon.so.0)
+  * Complete GUI startup audit: all 4 GUI files audited for missing
+    imports; no other missing imports found
+  * universal-downloader_2.0.8_all.deb with corrected GUI imports
+
 universal-downloader (2.0.7) stable; urgency=medium
 
   * Fixed NameError crash in JobController.__init__: `model.on_change(...)`
