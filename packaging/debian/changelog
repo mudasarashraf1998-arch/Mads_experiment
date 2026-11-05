@@ -1,3 +1,16 @@
+universal-downloader (2.0.7) stable; urgency=medium
+
+  * Fixed NameError crash in JobController.__init__: `model.on_change(...)`
+    referenced an undefined local `model` instead of `self.model`, causing
+    GUI startup crash on systems where PyQt6.QtWidgets imports succeed
+    (e.g. Linux Mint 22.3 with python3-pyqt6)
+  * Added regression test test_job_controller_init_no_nameerror to catch
+    the undefined variable reference at instantiation time
+  * Audited all of jobs.py for similar undefined variable references;
+    self.model.on_change(self._refresh_concurrency) is the only correction
+    required
+  * universal-downloader_2.0.7_all.deb with the fix
+
 universal-downloader (2.0.6) stable; urgency=medium
 
   * PyQt6 compatibility audit complete and verified: 36 tests pass,

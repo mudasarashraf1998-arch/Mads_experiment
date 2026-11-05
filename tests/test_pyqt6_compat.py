@@ -217,6 +217,24 @@ def test_app_imports_qtcore_only() -> None:
             assert not extra, f"app.py imports non-QtCore classes from QtCore: {extra}"
 
 
+def test_job_controller_init_no_nameerror(tmp_path) -> None:
+    """JobController.__init__ must not raise NameError for undefined 'model'.
+
+    Regression test: `model.on_change(...)` was used instead of
+    `self.model.on_change(...)` in JobController.__init__, causing a
+    NameError crash at GUI startup on systems where QtWidgets imports
+    succeed (e.g. Linux Mint 22.3 with python3-pyqt6).
+    """
+    from universal_downloader.config import Settings
+    from universal_downloader.jobs import JobController
+    from universal_downloader.queue import QueueModel
+
+    model = QueueModel(tmp_path / "queue.json")
+    settings = Settings()
+    controller = JobController(model, settings)
+    assert controller.model is model
+
+
 def test_no_qt5_style_locale() -> None:
     """No source file should use PyQt5-style QLocale flat enums."""
     import ast

@@ -141,7 +141,7 @@ class JobController(QObject):
         self.active: dict[str, DownloadJob] = {}
         self._lock = threading.Lock()
         self._retry_timers: dict[str, QTimer] = {}
-        model.on_change(self._refresh_concurrency)
+        self.model.on_change(self._refresh_concurrency)
 
     # ---------------------------------------------------------------- public API
 
