@@ -1,0 +1,17 @@
+#!/bin/sh
+# postinst for universal-downloader
+set -e
+
+case "$1" in
+  configure|abort-upgrade|abort-remove|abort-deconfigure)
+    # Refresh the desktop menu and icon theme cache, silently.
+    if [ -x /usr/bin/update-desktop-database ]; then
+      update-desktop-database /usr/share/applications 2>/dev/null || true
+    fi
+    if [ -x /usr/bin/gtk-update-icon-cache ]; then
+      gtk-update-icon-cache -q -t /usr/share/icons/hicolor 2>/dev/null || true
+    fi
+    ;;
+esac
+
+exit 0

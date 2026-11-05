@@ -1,0 +1,3 @@
+#!/bin/sh
+# Universal Downloader launcher
+PYTHONPATH=/opt/universal-downloader exec /usr/bin/python3 -m universal_downloader "$@"

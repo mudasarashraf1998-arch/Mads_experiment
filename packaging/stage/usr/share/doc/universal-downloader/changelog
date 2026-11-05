@@ -1,0 +1,14 @@
+universal-downloader (2.0.2) stable; urgency=medium
+
+  * Added the Universal Downloader 2.0.2 graphical desktop application
+    (PyQt6/Qt6): link paste, automatic source detection with manual
+    override, persistent download queue, real progress, speed and ETA,
+    pause/resume/cancel/retry, download history, settings and logs.
+  * Backend adapters for YouTube (yt-dlp), Google Drive (gdown), MEGA
+    (MEGAcmd) and direct file links (aria2c) with resume, skip-complete
+    and verified completion.
+  * Debian package installing under /opt/universal-downloader with an
+    application menu entry; user data kept in the home directory and
+    preserved across uninstall.
+
+ -- Universal Downloader <packaging@universal-downloader.local>  Wed, 05 Nov 2026 00:00:00 +0000

@@ -1,0 +1,24 @@
+Package: universal-downloader
+Version: 2.0.2
+Section: x11
+Priority: optional
+Architecture: all
+Maintainer: Universal Downloader <packaging@universal-downloader.local>
+Depends: python3 (>= 3.10), python3-pyqt6, xdg-utils
+Recommends: yt-dlp, aria2, curl, ffmpeg, libnotify-bin
+Description: Lightweight gaming-styled download manager for Linux
+ Universal Downloader is a graphical desktop application for downloading
+ videos and files from YouTube (yt-dlp), Google Drive (gdown), MEGA
+ (MEGAcmd) and direct file links (aria2c). It offers a persistent queue,
+ real progress read from the download tools, resume and retry, download
+ history and settings, and is designed to stay responsive on low-end
+ hardware such as a 4 GB RAM, dual-core computer running Linux Mint XFCE.
+ .
+ No Electron, no Chromium and no bundled binaries: it is a native Python
+ PyQt6 program that calls the system's download tools. Missing tools are
+ detected and explained in-app (Dependency doctor) instead of failing
+ silently.
+ .
+ Note: gdown and MEGAcmd are not in the Mint/Ubuntu package archive; the
+ application detects them at runtime and tells you how to install them.
+Homepage: https://github.com/mudasarashraf1998/Mads_experiment

@@ -1,0 +1,9 @@
+#!/bin/sh
+# prerm for universal-downloader
+set -e
+
+# Nothing to stop: the application is a per-user GUI with no system service.
+# User downloads, history, configuration and logs are intentionally NOT
+# touched here or in postrm.
+
+exit 0

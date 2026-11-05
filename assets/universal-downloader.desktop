@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Universal Downloader
+GenericName=Download Manager
+Comment=Download videos and files from YouTube, Google Drive, MEGA and direct links
+Exec=universal-downloader
+Icon=universal-downloader
+Terminal=false
+Type=Application
+Categories=Network;FileTransfer;
+Keywords=download;youtube;drive;mega;aria2;yt-dlp;
+StartupNotify=true

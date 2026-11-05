@@ -1,0 +1,18 @@
+#!/bin/sh
+# postrm for universal-downloader
+set -e
+
+case "$1" in
+  remove|purge)
+    # Refresh desktop database/icon cache after files are removed.
+    if [ -x /usr/bin/update-desktop-database ]; then
+      update-desktop-database /usr/share/applications 2>/dev/null || true
+    fi
+    if [ -x /usr/bin/gtk-update-icon-cache ]; then
+      gtk-update-icon-cache -q -t /usr/share/icons/hicolor 2>/dev/null || true
+    fi
+    # NOTE: user data in ~/.config, ~/.local/share and ~/.cache is kept.
+    ;;
+esac
+
+exit 0
