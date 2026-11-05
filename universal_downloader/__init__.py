@@ -1,4 +1,4 @@
-"""Universal Downloader 2.0.2 - lightweight gaming-styled download manager.
+"""Universal Downloader 2.0.3 - lightweight gaming-styled download manager.
 
 A PyQt6 desktop GUI for YouTube (yt-dlp), Google Drive (gdown), MEGA
 (MEGAcmd) and direct file links (aria2c).
@@ -8,7 +8,7 @@ entirely into RAM, downloads run as background jobs, and the GUI stays
 responsive on low-end hardware (4 GB RAM, dual-core CPU).
 """
 
-__version__ = "2.0.2"
+__version__ = "2.0.3"
 APP_NAME = "universal-downloader"
 APP_DISPLAY_NAME = "Universal Downloader"
 ORGANIZATION = "Universal Downloader"
