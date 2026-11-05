@@ -8,8 +8,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QDesktopServices, QUrl, QColor, QBrush
+from PyQt6.QtCore import Qt, QUrl
+from PyQt6.QtGui import QDesktopServices, QColor, QBrush
 from PyQt6.QtWidgets import (
     QAbstractItemView, QApplication, QFrame, QHBoxLayout, QHeaderView,
     QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton, QTableWidget,
@@ -191,7 +191,7 @@ class MainWindow(QMainWindow):
 
     def on_paste(self) -> None:
         clipboard = QApplication.clipboard()
-        text = clipboard.text(mode=QApplication.ClipboardMode).strip()
+        text = clipboard.text().strip()
         if text:
             self.url_entry.setText(text)
             self.on_detect()

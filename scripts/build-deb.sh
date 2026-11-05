@@ -1,11 +1,11 @@
 #!/bin/bash
-# Build universal-downloader_2.0.3_all.deb
+# Build universal-downloader_2.0.5_all.deb
 set -euo pipefail
 
 ROOT="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-VERSION="2.0.3"
+VERSION="2.0.5"
 PACKAGE="universal-downloader_${VERSION}_all.deb"
 STAGE="$ROOT/packaging/stage"
 DEBIAN_DIR="$ROOT/packaging/debian"

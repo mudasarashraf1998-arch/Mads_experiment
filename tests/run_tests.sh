@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run the automated test suite for Universal Downloader 2.0.2.
+# Run the automated test suite for Universal Downloader 2.0.5.
 # No real downloads are performed; downloader subprocesses are mocked.
 set -euo pipefail
 

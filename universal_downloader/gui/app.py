@@ -26,7 +26,7 @@ class UniversalDownloaderApp(QApplication):
         # window showing the same queue (stored in XDG data dir).
         self._apply_palette()
         self._apply_stylesheet()
-        QLocale.setDefault(QLocale(QLocale.English, QLocale.UnitedKingdom))
+        QLocale.setDefault(QLocale(QLocale.Language.English, QLocale.Country.UnitedKingdom))
 
     def _apply_palette(self) -> None:
         palette = QPalette()

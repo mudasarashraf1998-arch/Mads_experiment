@@ -1,4 +1,4 @@
-# Universal Downloader 2.0.3 — feature status
+# Universal Downloader 2.0.5 — feature status
 
 ✅ = fully implemented and tested  |  ⚠️ = implemented with limitations  |  ❌ = not yet implemented
 
@@ -61,7 +61,7 @@
 - [✅] Per-run logs, log viewer dialog
 
 ## Packaging
-- [✅] universal-downloader_2.0.3_all.deb, /opt install, menu entry, icon
+- [✅] universal-downloader_2.0.5_all.deb, /opt install, menu entry, icon
 - [✅] Dependencies registered; missing tools explained in-app
 - [✅] Uninstall preserves user data
 - [✅] SHA-256 checksums

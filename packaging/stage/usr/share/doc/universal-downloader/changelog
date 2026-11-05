@@ -1,6 +1,19 @@
-universal-downloader (2.0.2) stable; urgency=medium
+universal-downloader (2.0.5) stable; urgency=medium
 
-  * Added the Universal Downloader 2.0.2 graphical desktop application
+  * Fixed PyQt6 QLocale API error: QLocale(QLocale.English, QLocale.UnitedKingdom)
+    is invalid in PyQt6; changed to QLocale(QLocale.Language.English,
+    QLocale.Country.UnitedKingdom) in gui/app.py
+  * Fixed PyQt6 QClipboard API error: QApplication.ClipboardMode does not
+    exist in PyQt6; changed to clipboard.text() in gui/window.py
+  * Audited all PyQt6 imports across every Python file; verified each
+    class exists in the specified module (QUrl -> QtCore, QColor/QBrush/
+    QDesktopServices -> QtGui, all widgets -> QtWidgets)
+  * All PyQt6.QtCore imports verified via actual import test
+  * Ran automated test suite: 24 passed, 3 skipped (GUI tests skipped
+    on headless sandbox lacking libxkbcommon.so.0)
+  * universal-downloader_2.0.5_all.deb with corrected imports
+
+  * Added the Universal Downloader graphical desktop application
     (PyQt6/Qt6): link paste, automatic source detection with manual
     override, persistent download queue, real progress, speed and ETA,
     pause/resume/cancel/retry, download history, settings and logs.
@@ -11,4 +24,4 @@ universal-downloader (2.0.2) stable; urgency=medium
     application menu entry; user data kept in the home directory and
     preserved across uninstall.
 
- -- Universal Downloader <packaging@universal-downloader.local>  Wed, 05 Nov 2026 00:00:00 +0000
+ -- Universal Downloader <packaging@universal-downloader.local>  Thu, 06 Nov 2026 00:00:00 +0000

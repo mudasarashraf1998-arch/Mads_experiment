@@ -1,4 +1,4 @@
-# Universal Downloader 2.0.2
+# Universal Downloader 2.0.5
 
 Lightweight gaming-styled graphical download manager for Linux Mint 22.3 /
 Ubuntu 24.04 (amd64). Paste a link, pick your options, download — no terminal
@@ -18,7 +18,7 @@ dependency doctor.
 ## Install
 
 ```bash
-sudo apt install ./universal-downloader_2.0.3_all.deb
+sudo apt install ./universal-downloader_2.0.5_all.deb
 ```
 
 Then open **Universal Downloader** from the application menu (XFCE: Menu →
@@ -76,7 +76,7 @@ GUI.
 ./scripts/build-deb.sh
 ```
 
-Requires `dpkg-deb`. Produces `universal-downloader_2.0.3_all.deb` plus a
+Requires `dpkg-deb`. Produces `universal-downloader_2.0.5_all.deb` plus a
 SHA-256 checksum file.
 
 ## Testing
