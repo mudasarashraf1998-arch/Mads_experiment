@@ -1,3 +1,17 @@
+universal-downloader (2.0.6) stable; urgency=medium
+
+  * PyQt6 compatibility audit complete and verified: 36 tests pass,
+    4 skipped (GUI tests skipped on headless sandbox lacking
+    libxkbcommon.so.0 — passes on Linux Mint 22.3 with python3-pyqt6)
+  * Added PyQt6 compatibility regression test suite
+    (tests/test_pyqt6_compat.py) covering QtCore imports, QLocale enum
+    API, pyqtSlot decorator, QtGui/QtWidgets class locations, module
+    imports, QtCore-only import enforcement, no Qt5-style locale, no
+    ClipboardMode usage
+  * All PyQt6 imports verified against installed PyQt6 version across
+    every Python file — no code changes required
+  * universal-downloader_2.0.6_all.deb with audited imports
+
 universal-downloader (2.0.5) stable; urgency=medium
 
   * Fixed PyQt6 QLocale API error: QLocale(QLocale.English, QLocale.UnitedKingdom)
